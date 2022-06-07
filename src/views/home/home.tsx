@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUserInfo } from '@src/controller/reducer/globalSlice'
 // import api from '@api'
 import { Button } from 'antd'
+
 import * as main from './hello.wasm'
 
 import './home.module.less'
