@@ -40,7 +40,7 @@ choosePort(HOST, DEFAULT_PORT).then(port => {
     hot: true,
     // publicPath: '/',
     host: HOST,
-    port: port,
+    port,
     open: false,
     // writeToDisk: true,
     headers: {

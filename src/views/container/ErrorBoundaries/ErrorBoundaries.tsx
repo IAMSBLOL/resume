@@ -2,24 +2,27 @@ import React from 'react'
 import { Result, Button } from 'antd';
 import './ErrorBoundaries.module.less'
 
-class ErrorBoundary extends React.Component {
-  constructor (props:any) {
+type Props = {
+  children: React.ReactNode
+}
+class ErrorBoundary extends React.Component<Props> {
+  constructor(props: Props) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError ():any {
+  static getDerivedStateFromError(): any {
     // 更新 state 使下一次渲染能够显示降级后的 UI
     return { hasError: true };
   }
 
-  componentDidCatch (error:any, errorInfo:any):void {
+  componentDidCatch(error: any, errorInfo: any): void {
     // 你同样可以将错误日志上报给服务器
     // 告诉服务出事了
     console.error(error, errorInfo);
   }
 
-  render ():any {
+  render(): any {
     if ((this.state as any).hasError) {
       // 你可以自定义降级后的 UI 并渲染
       return (

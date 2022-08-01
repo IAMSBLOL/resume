@@ -61,6 +61,7 @@ module.exports = {
   publicUrlOrPath,
   appBabelrc: resolveApp('babel.config.js'),
   appEslintlrc: resolveApp('.eslintrc'),
+  appTsBuildInfoFile: resolveApp('node_modules/.cache/tsconfig.tsbuildinfo'),
   resolveApp
 };
 

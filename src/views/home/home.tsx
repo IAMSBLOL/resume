@@ -55,10 +55,11 @@ const Home = (props: any): JSX.Element => {
       </Link>
       <Link
         to={APP_HOME_TWO}
+
       >
-        <span>APP_HOME_TWO</span>
+        <span>APP_HOME_TW123O</span>
       </Link>
-      <div className='test1'>热更新似乎a不是s111很好用asd啊{test}</div>
+      <div className='test1'>热更新似乎a不是s111很1好用asd啊{test}</div>
       <Button type='primary'>123</Button>
       <Outlet />
     </div>

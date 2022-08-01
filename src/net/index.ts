@@ -1,8 +1,8 @@
 
 import axios, { AxiosResponse } from 'axios';
 
-// import { history } from '@router';
-
+import { history } from '@router';
+// import Qs from 'qs'
 import { message } from 'antd';
 
 // axios 配置
@@ -17,7 +17,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'; 
 
 // 请求
 axios.interceptors.request.use(
-  (config:any) => {
+  (config: any) => {
     const TOKEN = localStorage.getItem('token') || '';
     if (TOKEN) {
       config.headers.common.Token = TOKEN;
@@ -46,21 +46,38 @@ axios.interceptors.response.use(
   },
   (error) => {
     // 验证是否登录信息过期
-
+    console.log(error.response?.data, 'error')
     if (error.message === 'Network Error') {
       message.error('未连接到互联网')
     }
-
-    if (error.response?.data?.code === 400001) {
-      localStorage.removeItem('token')
-      //   cookieUtils.setCookie('userInfo', 0, -1)
-      // history.push('/app/test')
-    }
-
     const code = error.response?.status
 
+    if ([401].includes(Number(code))) {
+      message.error(error.response?.data?.message)
+      localStorage.removeItem('token')
+
+      // 应该带上当前失效路由的信息 search
+      const { pathname } = history.location
+      console.log(pathname)
+      // const params = Qs.stringify({
+      //   pathname, search
+      // })
+      // ZZ统计时间接口会触发BUG
+      // if (pathname === APP_LOGIN) {
+      //   return
+      // }
+      // history.push({
+      //   pathname: APP_LOGIN,
+      //   // search: params
+      // })
+    }
+
+    // const code = error.response?.status
+
     // =400不能改，s3专用
-    if (code >= 400 && code < 500) {
+
+    if (code !== 401 && code >= 400 && code < 500) {
+      console.log('s3aaaaa')
       return Promise.resolve({
         code: -1,
         message: error.response ? error.response.data?.message : error?.message
