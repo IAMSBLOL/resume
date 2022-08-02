@@ -101,11 +101,13 @@ module.exports = function (webpackEnv) {
   return {
     // context: paths.appPath,
     target: ['browserslist'],
+    // stats: 'errors-warnings',
     entry: [
       paths.appIndexJs,
     ],
     output: {
-      // path: paths.appBuild,
+      path: paths.appBuild,
+
       pathinfo: isEnvDevelopment,
       publicPath: paths.publicUrlOrPath,
       // fix: allow globalObject to be expression

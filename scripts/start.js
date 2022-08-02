@@ -140,5 +140,20 @@ choosePort(HOST, DEFAULT_PORT).then(port => {
 
   devServer.startCallback(() => {
     openBrowser(urls.localUrlForBrowser);
-  })
+  });
+
+  ['SIGINT', 'SIGTERM'].forEach(function (sig) {
+    process.on(sig, function () {
+      devServer.close();
+      process.exit();
+    });
+  });
+
+  if (process.env.CI !== 'true') {
+    // Gracefully exit when stdin ends
+    process.stdin.on('end', function () {
+      devServer.close();
+      process.exit();
+    });
+  }
 });
