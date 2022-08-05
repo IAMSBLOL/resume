@@ -9,7 +9,8 @@
     "build": "node scripts/build.js",
     "lint": "eslint src",
     "image": " node ./scripts/pushImage.js",
-    "bnp": "node scripts/build.js && node ./scripts/pushImage.js"
+    "bnp": "node scripts/build.js && node ./scripts/pushImage.js",
+    "emcc": " node ./scripts/emcc_build_wasm.js"
   },
   "keywords": [],
   "author": "",
@@ -113,6 +114,7 @@
     "redux-logger": "^3.0.6",
     "resolve-url-loader": "^5.0.0",
     "shell.js": "^3.3.1",
+    "shelljs": "^0.8.5",
     "style-loader": "^3.3.1",
     "style-resources-loader": "^1.5.0",
     "url-loader": "^4.1.1",
