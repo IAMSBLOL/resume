@@ -25,7 +25,7 @@ const routes = [
     element: <Navigate to={APP_HOME} replace />
   },
   {
-    path: '/app',
+    // path: '/app',
     // exact: true,
     strict: true,
     element: SuspenseFn(App),

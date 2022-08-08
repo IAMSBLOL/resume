@@ -1,6 +1,7 @@
-import React from 'react'
+
 import { Link } from 'react-router-dom'
-import { APP_HOME } from '../../router'
+import { APP_HOME } from '@router'
+import { ReactComponent as TestSvg } from './svg/test.svg'
 import './test.module.less'
 
 const Test = (props:any):JSX.Element => {
@@ -12,7 +13,8 @@ const Test = (props:any):JSX.Element => {
       >
         <span>Test</span>
       </Link>
-      <div className='test1'>热更新似乎不是很好用啊</div>
+      <div className='test1'>热更新似乎a不1是很好用啊</div>
+      <TestSvg />
     </div>
   )
 }
