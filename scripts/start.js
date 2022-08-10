@@ -19,7 +19,7 @@ const {
   prepareUrls,
 } = require('react-dev-utils/WebpackDevServerUtils');
 
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 9887;
 const HOST = process.env.HOST || '0.0.0.0';
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 

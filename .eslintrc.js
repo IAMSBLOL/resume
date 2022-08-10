@@ -30,13 +30,13 @@ module.exports = {
   ],
   rules: {
     'multiline-ternary': 'off',
-
+    camelcase: 0,
     'no-empty': ['off', { allowEmptyCatch: true }],
     indent: [
       'error',
       2,
       {
-        ignoredNodes: ['JSXAttribute', 'JSXSpreadAttribute']
+        // ignoredNodes: ['JSXAttribute', 'JSXSpreadAttribute']
       }
     ],
     'react/jsx-indent': [0, 2],
@@ -92,12 +92,13 @@ module.exports = {
       '@typescript-eslint'
     ],
     rules: {
+      camelcase: 0,
       'react/display-name': ['off', { ignoreTranspilerName: false }],
       indent: [
         'error',
         2,
         {
-          ignoredNodes: ['JSXAttribute', 'JSXSpreadAttribute']
+          // ignoredNodes: ['JSXAttribute', 'JSXSpreadAttribute']
         }
       ],
       'react/jsx-uses-react': 'off',
