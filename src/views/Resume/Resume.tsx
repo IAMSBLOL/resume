@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import WorkingTimeline from './three/WorkingTimeline'
+
 import './Resume.module.less'
 
 const Resume = (): JSX.Element => {

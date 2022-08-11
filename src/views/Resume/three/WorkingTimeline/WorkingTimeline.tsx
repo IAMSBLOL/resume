@@ -13,11 +13,14 @@ import {
   PlaneBufferGeometry,
   MeshBasicMaterial,
   DoubleSide,
-  RepeatWrapping
+  RepeatWrapping,
+  CubicBezierCurve3,
+  Vector3
   //   MathUtils
 } from 'three'
 import * as Curves from 'three/examples/jsm/curves/CurveExtras.js';
 import { WebGL } from '@src/utils'
+import Timeline from './Timeline'
 import './WorkingTimeline.module.less'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -31,12 +34,18 @@ const splines = {
   KnotCurve: new Curves.KnotCurve(),
   TrefoilKnot: new Curves.TrefoilKnot(),
   TorusKnot: new Curves.TorusKnot(20),
-  CinquefoilKnot: new Curves.CinquefoilKnot(20)
+  CinquefoilKnot: new Curves.CinquefoilKnot(20),
+  arc: new CubicBezierCurve3(
+    new Vector3(0, 0, 0),
+    new Vector3(0, 0, 200),
+    new Vector3(0, 0, 0),
+    new Vector3(0, 0, 200)
+  )
 };
 
 const params = {
-  splines: splines.GrannyKnot,
-  tubularSegments: 50,
+  splines: splines.arc,
+  tubularSegments: 32,
   radius: 4,
   radiusSegments: 32
 };
@@ -48,14 +57,14 @@ const tubeGeometry = new TubeGeometry(
   params.radiusSegments,
   true // closed
 );
-const texture = new TextureLoader().load('/background2.jpg')
+const texture = new TextureLoader().load('/space.jpg')
 texture.wrapS = RepeatWrapping;
 texture.wrapT = RepeatWrapping;
-texture.repeat.set(4, 4);
+texture.repeat.set(3, 3);
 const tubeMaterial = new MeshBasicMaterial({
   wireframe: false,
-  transparent: false,
-  opacity: 0.1,
+  transparent: true,
+  opacity: 0.5,
   side: DoubleSide,
   map: texture
 
@@ -122,12 +131,12 @@ const WorkingTimeline = (): JSX.Element => {
 
       onUpdate: (self) => {
         const SCROLL = self.scroll();
-        if (SCROLL > self.end - 1) {
+        if (SCROLL > self.end - 1000) {
           // Go forwards in time
           wrap(1, 1);
         } else if (SCROLL < 1 && self.direction < 0) {
           // Go backwards in time
-          wrap(-1, self.end - 1);
+          wrap(-1, self.end - 1000);
         }
       }
     });
@@ -147,7 +156,7 @@ const WorkingTimeline = (): JSX.Element => {
         glRender.current.setSize(width, height)
         camera.current.updateProjectionMatrix();
 
-        scene.current.background = new TextureLoader().load('/background2.jpg')
+        scene.current.background = new TextureLoader().load('/wallhaven-y8lqo7.jpg')
         scene.current.add(parent)
         const textureLoader = new TextureLoader()
         for (let i = 0; i < num; i++) {
@@ -172,7 +181,8 @@ const WorkingTimeline = (): JSX.Element => {
         const renderCvs = () => {
           if (tube.material.map) {
             // console.log(tube.material.map.offset.y)
-            tube.material.map.rotation += 0.001;
+            tube.material.map.offset.x += 0.0001;
+            tube.material.map.offset.y += 0.0001;
           }
           glRender.current?.render(scene.current, camera.current)
         }
@@ -219,6 +229,9 @@ const WorkingTimeline = (): JSX.Element => {
   return (
     <div styleName='WorkingTimeline' className='scroll'>
       <canvas ref={canvasIns} className='canvas' />
+      <div className='fucking_info_wrap'>
+        <Timeline />
+      </div>
     </div>
   )
 }
