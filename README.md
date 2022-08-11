@@ -1,19 +1,10 @@
-# react cli v-2022
+# A Simple Resume Web
 
 
-## 集成了哪些特性
-1. react18、RTK、saga、router@v6、antd、wasm
-2. eslint 本地运行时 + 编译时
-3. babel （除了个别提案感觉用起来会坑队友，基本都添加了）
-4. webpack 5
-5. CICD (自动化部署这一步暂时没空搞，最好还是jekins，不然需要中间服务管理tag)
-6. docker
-7. babel css module
-8. env（参考cra）
-9. ts + js (可以混合开发，喜欢用啥不强制要求)
-10. 飞书机器人
-11. 热更新
-12. 新的jsx转换和eslint规则
+## 简述
+搞简历是个琐碎的事情，还是写个模板后边更新json就好了。
+
+
 
 ### `yarn start`
 
@@ -51,16 +42,8 @@ eslint检测，但是没加fix，自己手动fix吧
 ### `yarn test` 
 暂未添加，正经前端搞啥自动化测试，是需求不够多吗
 
-### 备注
-项目中参考cra部分构建思维，我也懒得自己写部分脚本，直接使用react-dev-utils了，不过这个库有些不兼容webpack5，我改了放在==config-utils==文件夹
 
-### 待处理事件
-1. 测试单元
-2. 打包优化体积
-3. cdn （因为要钱所以放弃了）
-4. babel macro (感觉没必要搞，坑队友)
-6. stylelint
-7. ci runner管理(目前挂在局域网某台主机，使用shell)
+
 
 
 ## 相关文档链接
