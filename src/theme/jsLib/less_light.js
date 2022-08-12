@@ -17,7 +17,7 @@ const gddi_design = {
   'small-title-color': '#262626',
 
   // 正文
-  'primary-text-color': '#262626',
+  'primary-text-color': '#fff',
   'auxiliary-text-color': '#8C8C8C',
   'unactive-text-color': '#BFBFBF',
 

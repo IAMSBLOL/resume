@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import WorkingTimeline from './three/WorkingTimeline'
+import WorkingTimeline from './WorkingTimeline'
 
 import './Resume.module.less'
 

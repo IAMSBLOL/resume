@@ -14,7 +14,7 @@ import { isNil } from 'lodash'
 
 const less_light = require('@src/theme/jsLib/less_light')
 
-const globalPrefixCls = 'gddi'
+const globalPrefixCls = 'resume'
 
 const dynamicStyleMark = globalPrefixCls + '-' + Math.random().toString(36).slice(2);
 

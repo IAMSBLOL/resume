@@ -8,7 +8,14 @@ import { Provider } from 'react-redux';
 // 傻了吧唧的v6
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import Routes, { history } from './router'
+import { cusTheme } from '@src/utils'
+// antd动态主题的配置额
+import 'antd/dist/antd.variable.min.css'
+
 import './asset/style/appCustom.less'
+
+// 自定义主题
+cusTheme()
 
 ReactDOM
   .createRoot(document.getElementById('root'))
