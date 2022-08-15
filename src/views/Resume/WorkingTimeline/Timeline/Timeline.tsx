@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
-// import { gsap } from 'gsap'
+
 import './Timeline.module.less'
 
 const stepsList = [
   {
     title: '2022',
-    description: '某公司-xxx'
+    description: '1-xxx'
   },
   {
     title: '2021',
-    description: '某公司-xxx'
+    description: '2-xxx'
   },
   {
     title: '2020',
-    description: '某公司-xxx'
+    description: '3-xxx'
   },
 ]
 type Props={
@@ -31,7 +31,7 @@ const Timeline = (props:Props): JSX.Element => {
   }, [])
 
   const handleClick = (index:number) => {
-    const pos = (1 / 3) * index - 0.002;
+    const pos = (1 / 3) * (index + 1) - 0.002;
 
     scrollPosition(pos)
   }

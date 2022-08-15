@@ -10,10 +10,10 @@ import {
 
   Object3D,
   Mesh,
-  PlaneBufferGeometry,
+  // PlaneBufferGeometry,
   MeshBasicMaterial,
   FrontSide,
-  DoubleSide,
+  // DoubleSide,
   RepeatWrapping,
   CubicBezierCurve3,
   Vector3,
@@ -76,7 +76,7 @@ texture.repeat.set(6, 3);
 const tubeMaterial = new MeshBasicMaterial({
   wireframe: false,
   transparent: true,
-  opacity: 0.7,
+  opacity: 0.4,
   side: FrontSide,
   map: texture,
   // alphaTest: 0.2
@@ -101,17 +101,17 @@ tubeGeometry.scale(1, 1, -1)
 
 parent.add(tube);
 
-const images = [
-  'https://source.unsplash.com/TIGDsyy0TK4/500x500',
-  'https://source.unsplash.com/TdDtTu2rv4s/500x500',
-  'https://source.unsplash.com/eudGUrDdBB0/500x500',
+// const images = [
+//   'https://source.unsplash.com/TIGDsyy0TK4/500x500',
+//   'https://source.unsplash.com/TdDtTu2rv4s/500x500',
+//   'https://source.unsplash.com/eudGUrDdBB0/500x500',
 
-];
+// ];
 
 // const materials = [];
-const num = images.length;
+// const num = images.length;
 
-const geometry = new PlaneBufferGeometry(4, 4, 2, 3);
+// const geometry = new PlaneBufferGeometry(4, 4, 2, 3);
 
 // let iteration = 0;
 
@@ -126,6 +126,8 @@ const WorkingTimeline = (): JSX.Element => {
   ))
 
   const scene = useRef<THREE.Scene>(new Scene())
+
+  const currentY = useRef(0)
 
   useLayoutEffect(() => {
     scrollTrigger = ScrollTrigger.create({
@@ -160,28 +162,30 @@ const WorkingTimeline = (): JSX.Element => {
         glRender.current.setPixelRatio(window.devicePixelRatio)
         glRender.current.setSize(width, height)
 
-        scene.current.background = new TextureLoader().load('/wallhaven-y8lqo7.jpg')
+        scene.current.background = new TextureLoader().load('/bg815.png')
         scene.current.add(parent)
-        const textureLoader = new TextureLoader()
-        for (let i = 0; i < num; i++) {
-          const imageTexture = textureLoader.load(images[i]);
+        // const textureLoader = new TextureLoader()
+        // for (let i = 0; i < num; i++) {
+        //   const imageTexture = textureLoader.load(images[i]);
 
-          const material = new MeshBasicMaterial({
-            map: imageTexture,
-            side: DoubleSide
-          });
+        //   const material = new MeshBasicMaterial({
+        //     map: imageTexture,
+        //     side: DoubleSide,
+        //     opacity: 0.3,
+        //     transparent: true
+        //   });
 
-          // get positions in the tube
-          const point = (1 / num) * i;
-          const mesh = new Mesh(geometry, material);
+        //   // get positions in the tube
+        //   const point = (1 / num) * i;
+        //   const mesh = new Mesh(geometry, material);
 
-          const pos = tube.geometry.parameters.path.getPointAt(point);
-          const pos2 = tube.geometry.parameters.path.getPointAt(point + 0.01);
-          mesh.position.copy(pos);
-          mesh.lookAt(pos2);
+        //   const pos = tube.geometry.parameters.path.getPointAt(point);
+        //   const pos2 = tube.geometry.parameters.path.getPointAt(point + 0.01);
+        //   mesh.position.copy(pos);
+        //   mesh.lookAt(pos2);
 
-          scene.current.add(mesh);
-        }
+        //   scene.current.add(mesh);
+        // }
 
         const renderCvs = () => {
           if (tube.material.map) {
@@ -204,11 +208,41 @@ const WorkingTimeline = (): JSX.Element => {
   const scrollPosition = useCallback(
     (scrollAmount: number) => {
       // https:// codepen.io/Lighty/pen/GRqxvZV
+
       const pos = tube.geometry.parameters.path.getPointAt(scrollAmount);
       const pos2 = tube.geometry.parameters.path.getPointAt(scrollAmount + 0.001);
+      // console.log(pos, 'pos')
+      // console.log(pos2, 'pos2')
+      currentY.current = scrollAmount
       camera.current.position.copy(pos);
       camera.current.lookAt(pos2);
       camera.current.updateProjectionMatrix();
+    }, []
+  )
+
+  const jumpToPosition = useCallback(
+    (scrollAmount: number) => {
+      const nested = gsap.timeline();
+      const obj = {
+        x: currentY.current
+
+      }
+
+      nested.to(
+        obj, {
+          x: scrollAmount,
+
+          duration: 1,
+          onUpdate: () => {
+            const pos = tube.geometry.parameters.path.getPointAt(obj.x - 0.005);
+            const pos2 = tube.geometry.parameters.path.getPointAt(obj.x + 0.02);
+            camera.current.position.copy(pos);
+            camera.current.lookAt(pos2);
+            camera.current.updateProjectionMatrix();
+          }
+        }
+      )
+      currentY.current = scrollAmount
     }, []
   )
 
@@ -238,7 +272,7 @@ const WorkingTimeline = (): JSX.Element => {
     <div styleName='WorkingTimeline' className='scroll'>
       <canvas ref={canvasIns} className='canvas' />
       <div className='fucking_info_wrap'>
-        <Timeline scrollPosition={scrollPosition}/>
+        <Timeline scrollPosition={jumpToPosition}/>
       </div>
     </div>
   )
