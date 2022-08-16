@@ -319,6 +319,10 @@ module.exports = function (webpackEnv) {
               exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/, /\.wasm$/, /\.(md|glsl)$/],
               type: 'asset/resource',
             },
+            {
+              test: /\.(woff|woff2|eot|ttf|otf)$/i,
+              type: 'asset/resource',
+            },
 
           ]
         }

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-
-import './Timeline.module.less'
+import { clamp } from 'lodash'
+import './Catalogue.module.less'
 
 const stepsList = [
   {
@@ -20,7 +20,7 @@ type Props={
   scrollPosition: (v: number)=>void
 }
 // const scrollTotal = 1000;
-const Timeline = (props:Props): JSX.Element => {
+const Catalogue = (props:Props): JSX.Element => {
   const { scrollPosition } = props
   useEffect(() => {
     // const ease = gsap.parseEase('power1');
@@ -31,9 +31,9 @@ const Timeline = (props:Props): JSX.Element => {
   }, [])
 
   const handleClick = (index:number) => {
-    const pos = (1 / 3) * (index + 1) - 0.002;
+    const pos = (1 / 3) * (index) - 0.0001;
 
-    scrollPosition(pos)
+    scrollPosition(clamp(pos, 0, 1))
   }
   return (
     <div styleName='Timeline'>
@@ -69,4 +69,4 @@ const Timeline = (props:Props): JSX.Element => {
   )
 }
 
-export default Timeline
+export default Catalogue

@@ -22,7 +22,7 @@ import {
 } from 'three'
 import * as Curves from 'three/examples/jsm/curves/CurveExtras.js';
 import { WebGL } from '@src/utils'
-import Timeline from './Timeline'
+
 import './WorkingTimeline.module.less'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -76,7 +76,7 @@ texture.repeat.set(6, 3);
 const tubeMaterial = new MeshBasicMaterial({
   wireframe: false,
   transparent: true,
-  opacity: 0.4,
+  opacity: 0.5,
   side: FrontSide,
   map: texture,
   // alphaTest: 0.2
@@ -87,7 +87,7 @@ const parent = new Object3D();
 
 let scrollTrigger:any = null
 
-const scrollTotal = 1000;
+// const scrollTotal = 10000;
 
 const wrap = (iterationDelta: number, scrollTo: number) => {
   //   iteration += iterationDelta;
@@ -115,7 +115,13 @@ parent.add(tube);
 
 // let iteration = 0;
 
-const WorkingTimeline = (): JSX.Element => {
+type Props = {
+  height:number,
+  jumpPos:number
+}
+
+const WorkingTimeline = (props: Props): JSX.Element => {
+  const { height: scrollTotal, jumpPos } = props
   const canvasIns = useRef<HTMLCanvasElement | null>(null)
   const glRender = useRef<THREE.WebGLRenderer | null>(null)
   const camera = useRef<THREE.PerspectiveCamera>(new PerspectiveCamera(
@@ -130,6 +136,9 @@ const WorkingTimeline = (): JSX.Element => {
   const currentY = useRef(0)
 
   useLayoutEffect(() => {
+    if (scrollTotal === 0) {
+      return
+    }
     scrollTrigger = ScrollTrigger.create({
       start: 0,
       end: `+=${scrollTotal}`,
@@ -140,6 +149,7 @@ const WorkingTimeline = (): JSX.Element => {
         const SCROLL = self.scroll();
         if (SCROLL > self.end - 1) {
           // Go forwards in time
+
           wrap(1, 1);
         } else if (SCROLL < 1 && self.direction < 0) {
           // Go backwards in time
@@ -147,7 +157,7 @@ const WorkingTimeline = (): JSX.Element => {
         }
       }
     });
-  }, [])
+  }, [scrollTotal])
 
   useEffect(() => {
     if (canvasIns.current) {
@@ -210,7 +220,7 @@ const WorkingTimeline = (): JSX.Element => {
       // https:// codepen.io/Lighty/pen/GRqxvZV
 
       const pos = tube.geometry.parameters.path.getPointAt(scrollAmount);
-      const pos2 = tube.geometry.parameters.path.getPointAt(scrollAmount + 0.001);
+      const pos2 = tube.geometry.parameters.path.getPointAt(scrollAmount + 0.00001);
       // console.log(pos, 'pos')
       // console.log(pos2, 'pos2')
       currentY.current = scrollAmount
@@ -234,8 +244,8 @@ const WorkingTimeline = (): JSX.Element => {
 
           duration: 1,
           onUpdate: () => {
-            const pos = tube.geometry.parameters.path.getPointAt(obj.x - 0.005);
-            const pos2 = tube.geometry.parameters.path.getPointAt(obj.x + 0.02);
+            const pos = tube.geometry.parameters.path.getPointAt(obj.x);
+            const pos2 = tube.geometry.parameters.path.getPointAt(obj.x + 0.0000001);
             camera.current.position.copy(pos);
             camera.current.lookAt(pos2);
             camera.current.updateProjectionMatrix();
@@ -243,10 +253,27 @@ const WorkingTimeline = (): JSX.Element => {
         }
       )
       currentY.current = scrollAmount
-    }, []
+      wrap(1, Math.floor(scrollAmount * scrollTotal * 3 / 2))
+    }, [scrollTotal]
+  )
+
+  useEffect(
+    () => {
+      console.log(jumpPos, 'jumpPos')
+      if (scrollTrigger) {
+        if (jumpPos === 0) {
+          jumpToPosition(0.001)
+          return
+        }
+        jumpToPosition(jumpPos)
+      }
+    }, [jumpPos, jumpToPosition]
   )
 
   useEffect(() => {
+    if (scrollTotal === 0) {
+      return
+    }
     scrollPosition(0);
 
     window.addEventListener('resize', () => {
@@ -265,15 +292,12 @@ const WorkingTimeline = (): JSX.Element => {
     window.addEventListener('scroll', () => {
       const scroll_y = window.scrollY / scrollTotal;
       scrollPosition(scroll_y);
-      console.log(scroll_y)
     });
-  }, [scrollPosition])
+  }, [scrollPosition, scrollTotal])
   return (
     <div styleName='WorkingTimeline' className='scroll'>
       <canvas ref={canvasIns} className='canvas' />
-      <div className='fucking_info_wrap'>
-        <Timeline scrollPosition={jumpToPosition}/>
-      </div>
+
     </div>
   )
 }
