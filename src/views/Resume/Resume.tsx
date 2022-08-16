@@ -3,6 +3,7 @@ import WorkingTimeline from './WorkingTimeline'
 import PersonalInfo from './PersonalInfo'
 import Experience from './Experience'
 import Timeline from './Catalogue'
+// import ApproachMask from './ApproachMask'
 import './Resume.module.less'
 
 const Resume = (): JSX.Element => {
@@ -24,6 +25,7 @@ const Resume = (): JSX.Element => {
           return (
             <>
               <Timeline scrollPosition={jumpToPosition} />
+              {/* <ApproachMask /> */}
               <div className='Resume_content' ref={divRef}>
                 <PersonalInfo />
                 <Experience />
