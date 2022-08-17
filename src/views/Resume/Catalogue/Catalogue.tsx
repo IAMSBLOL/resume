@@ -14,7 +14,7 @@ const stepsList = [
   {
     title: '2020',
     description: '3-xxx'
-  },
+  }
 ]
 type Props={
   scrollPosition: (v: number)=>void
@@ -45,11 +45,7 @@ const Catalogue = (props:Props): JSX.Element => {
                 <div className='Timeline_point'>
 
                 </div>
-                {
-                  (stepsList.length !== i + 1) && (
-                    <div className='Timeline_line'></div>
-                  )
-                }
+                <div className='Timeline_line'></div>
               </div>
 
               <div className='step_info'>

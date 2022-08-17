@@ -76,7 +76,7 @@ texture.repeat.set(6, 3);
 const tubeMaterial = new MeshBasicMaterial({
   wireframe: false,
   transparent: true,
-  opacity: 0.5,
+  opacity: 0.4,
   side: FrontSide,
   map: texture,
   // alphaTest: 0.2
@@ -85,15 +85,15 @@ const tubeMaterial = new MeshBasicMaterial({
 
 const parent = new Object3D();
 
-let scrollTrigger:any = null
+// let scrollTrigger:any = null
 
 // const scrollTotal = 10000;
 
-const wrap = (iterationDelta: number, scrollTo: number) => {
-  //   iteration += iterationDelta;
-  scrollTrigger.scroll(scrollTo);
-  scrollTrigger.update();
-};
+// const wrap = (iterationDelta: number, scrollTo: number) => {
+//   //   iteration += iterationDelta;
+//   scrollTrigger.scroll(scrollTo);
+//   scrollTrigger.update();
+// };
 
 const tube = new Mesh(tubeGeometry, tubeMaterial);
 
@@ -117,11 +117,11 @@ parent.add(tube);
 
 type Props = {
   height:number,
-  jumpPos:number
+
 }
 
 const WorkingTimeline = (props: Props): JSX.Element => {
-  const { height: scrollTotal, jumpPos } = props
+  const { height: scrollTotal } = props
   const canvasIns = useRef<HTMLCanvasElement | null>(null)
   const glRender = useRef<THREE.WebGLRenderer | null>(null)
   const camera = useRef<THREE.PerspectiveCamera>(new PerspectiveCamera(
@@ -139,23 +139,24 @@ const WorkingTimeline = (props: Props): JSX.Element => {
     if (scrollTotal === 0) {
       return
     }
-    scrollTrigger = ScrollTrigger.create({
+    ScrollTrigger.create({
       start: 0,
       end: `+=${scrollTotal}`,
       horizontal: false,
       pin: '.scroll',
 
-      onUpdate: (self) => {
-        const SCROLL = self.scroll();
-        if (SCROLL > self.end - 1) {
-          // Go forwards in time
+      // onUpdate: (self) => {
+      //   const SCROLL = self.scroll();
+      //   if (SCROLL > self.end - 1) {
+      //     // Go forwards in time
 
-          wrap(1, 1);
-        } else if (SCROLL < 1 && self.direction < 0) {
-          // Go backwards in time
-          wrap(-1, self.end - 1);
-        }
-      }
+      //     wrap(1, 1);
+      //   } else if (SCROLL < 1 && self.direction < 0) {
+      //     // Go backwards in time
+      //     wrap(-1, self.end - 1);
+      //   }
+      // },
+      snap: 1 / 3
     });
   }, [scrollTotal])
 
@@ -230,45 +231,45 @@ const WorkingTimeline = (props: Props): JSX.Element => {
     }, []
   )
 
-  const jumpToPosition = useCallback(
-    (scrollAmount: number) => {
-      const nested = gsap.timeline();
-      const obj = {
-        x: currentY.current
+  // const jumpToPosition = useCallback(
+  //   (scrollAmount: number) => {
+  //     const nested = gsap.timeline();
+  //     const obj = {
+  //       x: currentY.current
 
-      }
+  //     }
 
-      nested.to(
-        obj, {
-          x: scrollAmount,
+  //     nested.to(
+  //       obj, {
+  //         x: scrollAmount,
 
-          duration: 1,
-          onUpdate: () => {
-            const pos = tube.geometry.parameters.path.getPointAt(obj.x);
-            const pos2 = tube.geometry.parameters.path.getPointAt(obj.x + 0.0000001);
-            camera.current.position.copy(pos);
-            camera.current.lookAt(pos2);
-            camera.current.updateProjectionMatrix();
-          }
-        }
-      )
-      currentY.current = scrollAmount
-      wrap(1, Math.floor(scrollAmount * scrollTotal * 3 / 2))
-    }, [scrollTotal]
-  )
+  //         duration: 1,
+  //         onUpdate: () => {
+  //           const pos = tube.geometry.parameters.path.getPointAt(obj.x);
+  //           const pos2 = tube.geometry.parameters.path.getPointAt(obj.x + 0.0000001);
+  //           camera.current.position.copy(pos);
+  //           camera.current.lookAt(pos2);
+  //           camera.current.updateProjectionMatrix();
+  //         }
+  //       }
+  //     )
+  //     currentY.current = scrollAmount
+  //     wrap(1, Math.floor(scrollAmount * scrollTotal * 3 / 2))
+  //   }, [scrollTotal]
+  // )
 
-  useEffect(
-    () => {
-      console.log(jumpPos, 'jumpPos')
-      if (scrollTrigger) {
-        if (jumpPos === 0) {
-          jumpToPosition(0.001)
-          return
-        }
-        jumpToPosition(jumpPos)
-      }
-    }, [jumpPos, jumpToPosition]
-  )
+  // useEffect(
+  //   () => {
+  //     console.log(jumpPos, 'jumpPos')
+  //     if (scrollTrigger) {
+  //       if (jumpPos === 0) {
+  //         jumpToPosition(0.001)
+  //         return
+  //       }
+  //       jumpToPosition(jumpPos)
+  //     }
+  //   }, [jumpPos, jumpToPosition]
+  // )
 
   useEffect(() => {
     if (scrollTotal === 0) {

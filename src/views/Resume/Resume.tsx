@@ -2,31 +2,31 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import WorkingTimeline from './WorkingTimeline'
 import PersonalInfo from './PersonalInfo'
 import Experience from './Experience'
-import Timeline from './Catalogue'
+// import Timeline from './Catalogue'
 // import ApproachMask from './ApproachMask'
 import './Resume.module.less'
 
 const Resume = (): JSX.Element => {
   const [height, setHeight] = useState(0)
-  const [jumpPos, jumpToPosition] = useState(0)
+
   const divRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (divRef.current) {
       const height = Number(divRef.current.offsetHeight)
-      setHeight(height * 2 / 3)
+      setHeight(height)
     }
   }, [])
   return (
     <div styleName='Resume'>
-      <WorkingTimeline height={height} jumpPos={jumpPos}/>
+      <WorkingTimeline height={height} />
       {
         useMemo(() => {
           return (
             <>
-              <Timeline scrollPosition={jumpToPosition} />
-              {/* <ApproachMask /> */}
+
               <div className='Resume_content' ref={divRef}>
+
                 <PersonalInfo />
                 <Experience />
                 <PersonalInfo />

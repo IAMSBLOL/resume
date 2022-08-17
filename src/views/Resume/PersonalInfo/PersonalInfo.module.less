@@ -4,12 +4,50 @@
     background-color: transparent;
     height: 100vh;
     color: #fff;
-    font-family: '仓耳渔阳体 W02';
-    font-size: 60px;
+    display: flex;
+    flex-direction: column;
+
+
 
     :global {
-        .nomal_text {
-            font-family: '思源宋体复古';
+        .header_wrap {
+            display: flex;
+            padding: 10px 40px 0 40px;
+            justify-content: space-between;
+
+            .logo_wrap {
+                font-family: "站酷高端黑 Regular";
+                font-weight: 500;
+                font-size: 60px;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .my_social_contact {
+                font-family: '仓耳渔阳体 W02';
+            }
+        }
+
+        .content_wrap {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 40px;
+            flex: 1;
+
+        }
+
+        .footer_wrap {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 40px;
+
+            .guide_svg {
+                width: 48px;
+                height: 48px;
+            }
         }
     }
 }

@@ -315,12 +315,12 @@ module.exports = function (webpackEnv) {
               ]
             },
             {
-              // loader: require.resolve('file-loader'),
-              exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/, /\.wasm$/, /\.(md|glsl)$/],
+              test: /\.(woff|woff2|eot|ttf|otf)$/i,
               type: 'asset/resource',
             },
             {
-              test: /\.(woff|woff2|eot|ttf|otf)$/i,
+              // loader: require.resolve('file-loader'),
+              exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/, /\.wasm$/, /\.(md|glsl)$/],
               type: 'asset/resource',
             },
 
