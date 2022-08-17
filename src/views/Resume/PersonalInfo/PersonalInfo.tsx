@@ -25,8 +25,12 @@ const PersonalInfo = (): JSX.Element => {
         </div>
       </div>
       <div className='content_wrap'>
-        123
-
+        <div className='personal_info_wrap'>
+          123
+        </div>
+        <div className='three_skill_wrap'>
+          为了不那么丑搞得three
+        </div>
       </div>
       <div className='footer_wrap'>
         <Scroll className='guide_svg' />
