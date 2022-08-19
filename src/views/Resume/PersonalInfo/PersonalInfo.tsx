@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { ReactComponent as Scroll } from './icon/scroll.svg'
 import gsap from 'gsap'
 import { TextPlugin } from 'gsap/TextPlugin'
+import Skill from './Skill'
 import './PersonalInfo.module.less'
 
 const PersonalInfo = (): JSX.Element => {
@@ -29,7 +30,7 @@ const PersonalInfo = (): JSX.Element => {
           123
         </div>
         <div className='three_skill_wrap'>
-          为了不那么丑搞得three
+          <Skill />
         </div>
       </div>
       <div className='footer_wrap'>
