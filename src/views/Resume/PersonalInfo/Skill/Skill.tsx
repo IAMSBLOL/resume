@@ -24,6 +24,12 @@ const Skill = (): JSX.Element => {
     if (!canvasWrap.current) {
       return
     }
+    const dir = new THREE.Vector3(
+      0.2 * 2 - 1,
+      0.3 * 2 - 1,
+      0.6 * 2 - 1
+    ).normalize()
+    console.log(dir, 'dir')
 
     const width = canvasWrap.current.offsetWidth
     const height = canvasWrap.current.offsetHeight
@@ -33,7 +39,8 @@ const Skill = (): JSX.Element => {
           antialias: true,
           canvas: canvasIns.current,
 
-          alpha: true
+          alpha: true,
+
         });
 
         const clock = new THREE.Clock();
@@ -59,9 +66,9 @@ const Skill = (): JSX.Element => {
           transparent: true,
 
         });
-        const geometry = new THREE.BoxGeometry(0.75, 0.75, 0.75);
+        const geometry = new THREE.BoxGeometry(2, 2, 2, 200, 200, 200);
         const mesh = new THREE.Mesh(geometry, material);
-        mesh.position.x = -0.5
+        mesh.position.x = 0
         scene.current.add(mesh);
 
         const renderCvs = () => {
@@ -74,8 +81,9 @@ const Skill = (): JSX.Element => {
           renderCvs()
           const delta = clock.getDelta();
           mesh.rotation.y += delta * 0.1
-          mesh.rotation.x += delta * 0.1
-          uniforms.time.value += delta * 5;
+
+          uniforms.time.value += delta * 0.1;
+
           requestAnimationFrame(rendera)
         }
 
