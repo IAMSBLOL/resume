@@ -67,6 +67,7 @@ const Skill = (): JSX.Element => {
 
         });
         const geometry = new THREE.BoxGeometry(2, 2, 2, 200, 200, 200);
+        console.log(geometry.attributes)
         const mesh = new THREE.Mesh(geometry, material);
         mesh.position.x = 0
         scene.current.add(mesh);
