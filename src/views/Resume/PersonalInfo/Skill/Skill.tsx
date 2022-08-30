@@ -66,11 +66,12 @@ const Skill = (): JSX.Element => {
           transparent: true,
 
         });
-        const geometry = new THREE.BoxGeometry(2, 2, 2, 200, 200, 200);
+        const geometry = new THREE.SphereGeometry(1, 32, 16);
         console.log(geometry.attributes)
-        const mesh = new THREE.Mesh(geometry, material);
-        mesh.position.x = 0
-        scene.current.add(mesh);
+        const points = new THREE.Points(geometry, material);
+        // const mesh = new THREE.Mesh(geometry, material);
+        // mesh.position.x = 0
+        scene.current.add(points);
 
         const renderCvs = () => {
           if (camera.current) {
@@ -81,7 +82,7 @@ const Skill = (): JSX.Element => {
         const rendera = () => {
           renderCvs()
           const delta = clock.getDelta();
-          mesh.rotation.y += delta * 0.1
+          // mesh.rotation.y += delta * 0.1
 
           uniforms.time.value += delta * 0.1;
 
