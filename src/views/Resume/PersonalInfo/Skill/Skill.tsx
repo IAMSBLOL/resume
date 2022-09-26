@@ -71,6 +71,7 @@ const Skill = (): JSX.Element => {
         const points = new THREE.Points(geometry, material);
         // const mesh = new THREE.Mesh(geometry, material);
         // mesh.position.x = 0
+
         scene.current.add(points);
 
         const renderCvs = () => {
