@@ -66,9 +66,9 @@ const Skill = (): JSX.Element => {
           transparent: true,
 
         });
-        const geometry = new THREE.SphereGeometry(1, 32, 16);
+        const geometry = new THREE.PlaneGeometry(2, 2, 32, 32);
         console.log(geometry.attributes)
-        const points = new THREE.Points(geometry, material);
+        const points = new THREE.Mesh(geometry, material);
         // const mesh = new THREE.Mesh(geometry, material);
         // mesh.position.x = 0
 
@@ -85,7 +85,7 @@ const Skill = (): JSX.Element => {
           const delta = clock.getDelta();
           // mesh.rotation.y += delta * 0.1
 
-          uniforms.time.value += delta * 0.1;
+          uniforms.time.value += delta;
 
           requestAnimationFrame(rendera)
         }
