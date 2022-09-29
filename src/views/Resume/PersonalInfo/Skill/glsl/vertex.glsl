@@ -23,7 +23,7 @@ void main() {
 	float z = noise3d(vec3(time, time, pos.z));
 
 	vec4 mvPosition = modelViewMatrix * vec4(pos.x, pos.y, z, 1);
-	gl_Position = projectionMatrix * mvPosition;
+	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1);
 	gl_PointSize = 4.0;
 
 }
