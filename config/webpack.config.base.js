@@ -304,10 +304,13 @@ module.exports = function (webpackEnv) {
                 inputSourceMap: shouldUseSourceMap,
               },
             },
-
+            {
+              test: /\.glsl$/,
+              loader: 'webpack-glsl-loader'
+            },
             // 不能给file-loader匹配到、不然你的glsl就GG了
             {
-              test: /\.(md|glsl)$/,
+              test: /\.(md)$/,
               use: [
                 {
                   loader: 'raw-loader'

@@ -10,7 +10,7 @@ const PersonalInfo = (): JSX.Element => {
   useEffect(() => {
     gsap.registerPlugin(TextPlugin)
     const tl = gsap.timeline();
-    tl.to('.logo_wrap', { text: '站酷高端黑 Regular', duration: 1 });
+    tl.to('.logo_wrap', { text: 'what the fuck', duration: 1 });
 
     gsap.fromTo('.guide_svg path', { y: -200 }, { duration: 2, y: 0, fill: '#fff', repeat: Infinity })
   }, [])
