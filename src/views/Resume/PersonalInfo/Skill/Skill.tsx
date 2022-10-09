@@ -21,7 +21,7 @@ const parameters:any = {}
 parameters.count = 200000
 parameters.size = 0.0001
 parameters.radius = 3
-parameters.branches = 6
+parameters.branches = 10
 parameters.spin = 1
 parameters.randomness = 0.5
 parameters.randomnessPower = 5
@@ -70,7 +70,7 @@ const Skill = (): JSX.Element => {
           100
         )
 
-        camera.current.position.set(3, 3, 3);
+        camera.current.position.set(3, 4, 3);
         camera.current.lookAt(scene.current.position);
 
         // const material = new THREE.ShaderMaterial({
@@ -105,7 +105,7 @@ const Skill = (): JSX.Element => {
           const branchAngle = (i % parameters.branches) / parameters.branches * Math.PI * 2
 
           const randomX = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * radius
-          const randomY = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * radius / 2
+          const randomY = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * radius
           const randomZ = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * radius
 
           positions[i3] = Math.sin(branchAngle) * radius
@@ -143,7 +143,7 @@ const Skill = (): JSX.Element => {
           uniforms:
           {
             uTime: { value: 0 },
-            uSize: { value: 10 * glRender.current.getPixelRatio() }
+            uSize: { value: 5 * glRender.current.getPixelRatio() }
           },
           vertexShader: galaxyVertexShader,
           fragmentShader: galaxyFragmentShader

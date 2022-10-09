@@ -4,13 +4,14 @@ import { ReactComponent as Scroll } from './icon/scroll.svg'
 import gsap from 'gsap'
 import { TextPlugin } from 'gsap/TextPlugin'
 import Skill from './Skill'
+import { GithubOutlined, ZhihuOutlined } from '@ant-design/icons'
 import './PersonalInfo.module.less'
 
 const PersonalInfo = (): JSX.Element => {
   useEffect(() => {
     gsap.registerPlugin(TextPlugin)
     const tl = gsap.timeline();
-    tl.to('.logo_wrap', { text: 'what the fuck', duration: 1 });
+    tl.to('.logo_wrap', { text: 'The Martrix', duration: 1 });
 
     gsap.fromTo('.guide_svg path', { y: -200 }, { duration: 2, y: 0, fill: '#fff', repeat: Infinity })
   }, [])
@@ -22,6 +23,8 @@ const PersonalInfo = (): JSX.Element => {
 
         </div>
         <div className='my_social_contact'>
+          <a href='https://github.com/IAMSBLOL/resume' target='_blank' rel="noreferrer"><GithubOutlined /></a>
+          <a href='https://www.zhihu.com/people/zhong-guo-meng-77/posts' target='_blank' rel="noreferrer"><ZhihuOutlined /></a>
 
         </div>
       </div>

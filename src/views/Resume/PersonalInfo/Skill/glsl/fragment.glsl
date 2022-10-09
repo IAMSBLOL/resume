@@ -1,5 +1,6 @@
 varying vec3 vColor;
 varying vec2 vUv;
+
 void main() {
     // // Disc
     // float strength = distance(gl_PointCoord, vec2(0.5));
@@ -12,9 +13,9 @@ void main() {
     // strength = 1.0 - strength;
 
     // Light point
-    float strength = distance(vUv, vec2(0.5));
+    float strength = distance(gl_PointCoord, vec2(0.5));
     strength = 1.0 - strength;
-    // strength = pow(strength, 10.0);
+    // strength = pow(strength, 4.0);
 
     // Final color
     vec3 color = mix(vec3(0.0), vColor, strength);
