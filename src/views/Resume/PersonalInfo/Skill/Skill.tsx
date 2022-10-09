@@ -70,8 +70,8 @@ const Skill = (): JSX.Element => {
           100
         )
 
-        camera.current.position.set(3, 4, 3);
-        camera.current.lookAt(scene.current.position);
+        camera.current.position.set(0, 2, 5);
+        camera.current.lookAt(new THREE.Vector3(0, 0, -1));
 
         // const material = new THREE.ShaderMaterial({
 
