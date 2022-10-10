@@ -16,7 +16,19 @@
             .logo_wrap {
                 font-family: "gdh_Regular";
                 font-weight: 500;
-                font-size: 30px;
+                font-size: 25px;
+                display: flex;
+                height: 30px;
+
+                svg * {
+
+                    fill: transparent;
+                    stroke: transparent;
+                }
+
+                svg {
+                    margin-right: 15px;
+                }
             }
 
             .logo {
@@ -36,20 +48,29 @@
         }
 
         .content_wrap {
-
-
-            padding: 0 40px;
+            width: 100%;
             flex: 1;
-            display: flex;
 
+            position: relative;
 
             .personal_info_wrap {
-                flex: 1;
+                width: 100%;
+                height: 100%;
                 display: flex;
                 // justify-content: center;
                 align-items: center;
                 flex-direction: column;
 
+                position: absolute;
+                padding: 0 40px;
+
+                .city_bg_wrap {
+                    position: absolute;
+
+                    top: 20%;
+                    right: 20%;
+                    transform: translateY(-50%);
+                }
 
                 .ch_city,
                 .en_city {
@@ -57,16 +78,85 @@
                     font-family: "gdh_Regular";
                     opacity: 0.5;
                 }
+
+                .ch_city {
+                    font-size: 60px;
+                    line-height: 60px;
+                    margin: 0;
+                }
+
+                .descriptions {
+                    width: 100%;
+
+                    // border: 1px solid #fff;
+                    height: 100%;
+                    padding-top: 7%;
+
+                    .title {
+                        font-weight: 600;
+                        font-size: 80px;
+                        font-family: "gdh_Regular";
+                        color: rgba(255, 255, 255, 0.8);
+                        padding-left: 10%;
+                    }
+
+                    .text {
+                        font-size: 25px;
+                        // font-family: "fangsong";
+                        font-weight: 500;
+                        padding-left: 11%;
+                        margin-bottom: 20px;
+                        color: rgba(255, 255, 255, 1);
+                    }
+
+                    .tag {
+                        padding: 6px 25px;
+                        font-size: 30px;
+                    }
+
+                    .nineninesix {
+                        border: rgba(255, 96, 48, 1.000);
+                        border-radius: 15px;
+                        color: rgba(255, 96, 48, 1.000);
+                        background-color: rgba(255, 96, 48, 0.5);
+
+                        margin-left: 10%;
+                    }
+
+                    .no_money {
+                        border: rgba(255, 96, 48, 1.000);
+                        border-radius: 15px;
+                        color: rgba(255, 96, 48, 1.000);
+                        background-color: rgba(255, 96, 48, 0.5);
+
+                        margin-left: 1%;
+                    }
+
+                    .contact_wrap {
+                        color: #fff;
+                        position: absolute;
+                        bottom: 3%;
+                        display: flex;
+                        left: 30%;
+                        font-size: 16px;
+
+                        .contact_item {
+                            margin-right: 20px;
+                        }
+                    }
+                }
             }
 
             .three_skill_wrap {
-                min-width: 500px;
-                flex: 1.5;
+                min-width: 60vw;
+                position: absolute;
+                right: 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
                 height: 100%;
+                z-index: -1;
                 // background-color: aqua;
             }
 
