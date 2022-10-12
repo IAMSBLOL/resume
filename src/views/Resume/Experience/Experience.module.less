@@ -5,11 +5,52 @@
     height: 100vh;
     color: #fff;
     font-family: '仓耳渔阳体 W02';
-    font-size: 60px;
+
+    position: relative;
+    padding: 30px;
 
     :global {
-        .nomal_text {
-            font-family: '思源宋体复古';
+        .Experience_bg {
+            background: url(../../../asset/images/vscode.jpg);
+            opacity: 0.2;
+            height: 100%;
+        }
+
+        .resume_info_wrap {
+            width: 50vw;
+            min-height: 60vh;
+            min-width: 600px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            padding: 30px;
+            border: 1px solid #fff;
+            border-radius: 15px;
+            background-color: rgba(0, 0, 0, 0.2);
+
+            .title {
+                font-family: "gdh_Regular";
+                color: #fff;
+                font-size: 60px;
+            }
+
+            p {
+                font-size: 16px;
+                margin: 2vh 0;
+            }
+
+            .end_text {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 20px;
+                font-family: "gdh_Regular";
+                margin-top: 5vh;
+                border-bottom: 1px solid #fff;
+                bottom: 3vh;
+            }
         }
     }
 }

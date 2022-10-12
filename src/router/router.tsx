@@ -2,7 +2,7 @@
 import { lazy } from 'react';
 import { useRoutes, Navigate } from 'react-router-dom';
 import {
-  APP_TEST, APP_Resume
+  APP_TEST, APP_Resume, APP_NO_PERMISSION
 } from './pathNames'
 
 import { SuspenseFn } from './utils'
@@ -32,6 +32,10 @@ const routes = [
         path: APP_Resume,
         element: SuspenseFn(Resume),
 
+      },
+      {
+        path: APP_NO_PERMISSION,
+        element: SuspenseFn(NotFound),
       },
       {
         path: '*',

@@ -6,7 +6,8 @@ import fn from './fn'
 
 const initialState = {
   userInfo: { test: '666' },
-  homePageInfo: {}
+  homePageInfo: {},
+  show: false
 }
 
 const ApplicationDetailSlice = createSlice({
@@ -16,7 +17,7 @@ const ApplicationDetailSlice = createSlice({
 })
 const { actions } = ApplicationDetailSlice
 const {
-  saveUserInfo, setHomePageInfo
+  saveUserInfo, setHomePageInfo, setTextShow
 } = actions
 
 // 告诉saga开始处理请求
@@ -25,7 +26,8 @@ const getUserInfo = createAction<any>('globalSlice/getUserInfo')
 export {
   getUserInfo,
   saveUserInfo,
-  setHomePageInfo
+  setHomePageInfo,
+  setTextShow
 }
 
 export default ApplicationDetailSlice.reducer

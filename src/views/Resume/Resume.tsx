@@ -29,7 +29,6 @@ const Resume = (): JSX.Element => {
 
                 <PersonalInfo />
                 <Experience />
-                <PersonalInfo />
               </div>
             </>
           )

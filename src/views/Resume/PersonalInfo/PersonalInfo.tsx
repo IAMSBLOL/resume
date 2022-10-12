@@ -4,7 +4,7 @@ import { ReactComponent as Scroll } from './icon/scroll.svg'
 import gsap from 'gsap'
 import { TextPlugin } from 'gsap/TextPlugin'
 import Skill from './Skill'
-import { GithubOutlined, ZhihuOutlined, PhoneOutlined, MediumOutlined } from '@ant-design/icons'
+import { GithubOutlined, ZhihuOutlined } from '@ant-design/icons'
 import { ReactComponent as TranfomerSvg } from './icon/tranfomer.svg'
 import './PersonalInfo.module.less'
 
@@ -43,23 +43,23 @@ const PersonalInfo = (): JSX.Element => {
             <h1 className='title'>Online Resume</h1>
 
             <p className='text'>
-              本人从事切图5年有余,在切图方面颇有心得...
+              本人从事前端企图仔5年有余,在切图方面颇有心得...
             </p>
+
             <p className='text'>
-              算了,摊牌了.
+              算了,摊牌了.<span className='tag nineninesix'>接受996</span><span className='tag no_money'>要钱少</span>
             </p>
-            <div>
-              <span className='tag nineninesix'>1222</span><span className='tag no_money'>123123</span>
-            </div>
 
             <div className='contact_wrap'>
               <div className='contact_item'>
-                <MediumOutlined /> 称呼: Matrix
+                  By: Matrix
               </div>
               <div className='contact_item'>
-                <PhoneOutlined /> 联系方式: 15219267088
+                 Tel: 15219267088
               </div>
-
+              <div className='contact_item'>
+                  Emial: eudemonia_c@foxmail.com
+              </div>
             </div>
           </div>
         </div>
@@ -69,6 +69,7 @@ const PersonalInfo = (): JSX.Element => {
       </div>
       <div className='footer_wrap'>
         <Scroll className='guide_svg' />
+        <p>滚动下滑</p>
       </div>
     </div>
   )

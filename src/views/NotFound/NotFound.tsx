@@ -15,12 +15,17 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import './NotFound.module.less'
 
+const size = {
+  width: window.innerWidth,
+  height: window.innerHeight
+}
+console.log(document.body.offsetWidth)
 const NotFound = (): JSX.Element => {
   const canvasIns = useRef<HTMLCanvasElement | null>(null)
   const glRender = useRef<THREE.WebGLRenderer | null>(null)
   const camera = useRef<THREE.PerspectiveCamera>(new PerspectiveCamera(
     90,
-    1000 / 600,
+    size.width / size.height,
     1,
     1800
   ))
@@ -41,16 +46,16 @@ const NotFound = (): JSX.Element => {
         camera.current.position.z = 2;
         glRender.current.setPixelRatio(window.devicePixelRatio)
 
-        glRender.current.setSize(1000, 500)
+        glRender.current.setSize(size.width, size.height)
 
         const renderCvs = () => {
           glRender.current?.render(scene.current, camera.current)
         }
 
-        scene.current.background = new TextureLoader().load('/no_found.jpg')
+        scene.current.background = new TextureLoader().load('/mobile.jpg')
 
         const composer = new EffectComposer(glRender.current);
-        composer.setSize(1000, 500);
+        composer.setSize(size.width, size.height)
         // const firstpersion = new (Three as any).FirstPersonControls()
         const renderPass = new RenderPass(scene.current, camera.current);
         composer.addPass(renderPass);
@@ -73,7 +78,10 @@ const NotFound = (): JSX.Element => {
         {
           useMemo(() => <canvas ref={canvasIns} className='canvas' />, [])
         }
-        {/* <GButton type='primary'>返回</GButton> */}
+        <div className='sorry_text'>
+          <p>抱歉，未移动端尺寸</p>
+          <p>请用非IE浏览器打开</p>
+        </div>
       </div>
     </div>
   )

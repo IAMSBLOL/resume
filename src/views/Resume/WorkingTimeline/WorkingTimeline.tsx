@@ -22,7 +22,8 @@ import {
 } from 'three'
 import * as Curves from 'three/examples/jsm/curves/CurveExtras.js';
 import { WebGL } from '@src/utils'
-
+import { useDispatch } from 'react-redux'
+import { setTextShow } from '@src/controller/reducer/globalSlice'
 import './WorkingTimeline.module.less'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -122,8 +123,11 @@ type Props = {
 
 const WorkingTimeline = (props: Props): JSX.Element => {
   const { height: scrollTotal } = props
+
+  const dispatch = useDispatch()
   const canvasIns = useRef<HTMLCanvasElement | null>(null)
   const glRender = useRef<THREE.WebGLRenderer | null>(null)
+  const yes = useRef(false)
   const camera = useRef<THREE.PerspectiveCamera>(new PerspectiveCamera(
     90,
     width / height,
@@ -156,9 +160,19 @@ const WorkingTimeline = (props: Props): JSX.Element => {
       //     wrap(-1, self.end - 1);
       //   }
       // },
-      snap: 1 / 3
+      snap: 1 / 2,
+      onSnapComplete: (self) => {
+        const scrollTop = self.scroll()
+        if (scrollTop === window.innerHeight) {
+          if (!yes.current) {
+            console.log('yesyes')
+            dispatch(setTextShow({ show: true }))
+            yes.current = true
+          }
+        }
+      }
     });
-  }, [scrollTotal])
+  }, [dispatch, scrollTotal])
 
   useEffect(() => {
     if (canvasIns.current) {

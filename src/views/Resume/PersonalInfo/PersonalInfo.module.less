@@ -101,7 +101,7 @@
                     }
 
                     .text {
-                        font-size: 25px;
+                        font-size: 18px;
                         // font-family: "fangsong";
                         font-weight: 500;
                         padding-left: 11%;
@@ -112,36 +112,38 @@
                     .tag {
                         padding: 6px 25px;
                         font-size: 30px;
+                        margin-left: 1%;
+                        border-radius: 10px;
                     }
 
                     .nineninesix {
-                        border: rgba(255, 96, 48, 1.000);
-                        border-radius: 15px;
-                        color: rgba(255, 96, 48, 1.000);
-                        background-color: rgba(255, 96, 48, 0.5);
-
-                        margin-left: 10%;
+                        border: rgba(42, 92, 170, 1.000);
+                        color: rgba(42, 92, 170, 1.000);
+                        background-color: rgba(42, 92, 170, 0.10);
+                        text-shadow: 1px 1px 3px #000;
                     }
 
                     .no_money {
-                        border: rgba(255, 96, 48, 1.000);
-                        border-radius: 15px;
-                        color: rgba(255, 96, 48, 1.000);
-                        background-color: rgba(255, 96, 48, 0.5);
-
-                        margin-left: 1%;
+                        border: rgba(237, 25, 65, 1.000);
+                        color: rgba(237, 25, 65, 1.000);
+                        background-color: rgba(237, 25, 65, 0.1);
+                        text-shadow: 1px 1px 3px #000;
                     }
 
                     .contact_wrap {
                         color: #fff;
-                        position: absolute;
-                        bottom: 3%;
-                        display: flex;
-                        left: 30%;
-                        font-size: 16px;
+
+                        font-size: 20px;
+                        margin-top: 5%;
 
                         .contact_item {
+                            margin-left: 10%;
+                            padding: 20px 0 20px 20px;
                             margin-right: 20px;
+                            border-left: #fff 1px solid;
+                            font-size: 20px;
+                            font-weight: 600;
+                            text-shadow: 0 0 5px #fff, 0 0 2px #ed1941, 0 0 6px #ed1941, 0 0 12px #ed1941;
                         }
                     }
                 }
@@ -166,10 +168,13 @@
             display: flex;
             justify-content: center;
             padding-bottom: 40px;
+            flex-direction: column;
+            align-items: center;
 
             .guide_svg {
                 width: 48px;
                 height: 48px;
+                margin-bottom: 20px;
             }
         }
     }
