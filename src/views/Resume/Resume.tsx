@@ -15,6 +15,13 @@ const Resume = (): JSX.Element => {
     if (divRef.current) {
       const height = Number(divRef.current.offsetHeight)
       setHeight(height)
+
+      window.addEventListener('resize', () => {
+        // update sizes
+        console.log(divRef.current?.offsetHeight, 21)
+        const height = Number(divRef.current?.offsetHeight)
+        setHeight(height)
+      });
     }
   }, [])
   return (

@@ -137,13 +137,18 @@ const WorkingTimeline = (props: Props): JSX.Element => {
 
   const scene = useRef<THREE.Scene>(new Scene())
 
+  const sroller = useRef<any>(null)
+
   const currentY = useRef(0)
 
   useLayoutEffect(() => {
     if (scrollTotal === 0) {
       return
     }
-    ScrollTrigger.create({
+    if (sroller.current) {
+      return
+    }
+    sroller.current = ScrollTrigger.create({
       start: 0,
       end: `+=${scrollTotal}`,
       horizontal: false,
@@ -163,7 +168,8 @@ const WorkingTimeline = (props: Props): JSX.Element => {
       snap: 1 / 2,
       onSnapComplete: (self) => {
         const scrollTop = self.scroll()
-        if (scrollTop === window.innerHeight) {
+        console.log(self, 'self')
+        if (scrollTop >= scrollTotal / 2) {
           if (!yes.current) {
             console.log('yesyes')
             dispatch(setTextShow({ show: true }))
@@ -173,6 +179,49 @@ const WorkingTimeline = (props: Props): JSX.Element => {
       }
     });
   }, [dispatch, scrollTotal])
+
+  const scrollPosition = useCallback(
+    (scrollAmount: number) => {
+      // https:// codepen.io/Lighty/pen/GRqxvZV
+      console.log(scrollAmount, 'scrollAmount')
+
+      const pos = tube.geometry.parameters.path.getPointAt(scrollAmount);
+      const pos2 = tube.geometry.parameters.path.getPointAt(scrollAmount + 0.00001);
+      // console.log(pos, 'pos')
+      // console.log(pos2, 'pos2')
+      currentY.current = scrollAmount
+      camera.current.position.copy(pos);
+      camera.current.lookAt(pos2);
+      camera.current.updateProjectionMatrix();
+    }, []
+  )
+
+  useEffect(
+    () => {
+      if (sroller.current) {
+        // console.log(scrollTotal, 'scrollTotal')
+        // scrollPosition(0);
+        sroller.current.init({
+          start: 0,
+          end: `+=${scrollTotal}`,
+          horizontal: false,
+          pin: '.scroll',
+          snap: 1 / 2,
+          onSnapComplete: (self:any) => {
+            const scrollTop = self.scroll()
+            console.log(self, 'self')
+            if (scrollTop >= scrollTotal / 2) {
+              if (!yes.current) {
+                console.log('yesyes')
+                dispatch(setTextShow({ show: true }))
+                yes.current = true
+              }
+            }
+          }
+        })
+      }
+    }, [scrollTotal, dispatch, scrollPosition]
+  )
 
   useEffect(() => {
     if (canvasIns.current) {
@@ -229,21 +278,6 @@ const WorkingTimeline = (props: Props): JSX.Element => {
       }
     }
   }, [])
-
-  const scrollPosition = useCallback(
-    (scrollAmount: number) => {
-      // https:// codepen.io/Lighty/pen/GRqxvZV
-
-      const pos = tube.geometry.parameters.path.getPointAt(scrollAmount);
-      const pos2 = tube.geometry.parameters.path.getPointAt(scrollAmount + 0.00001);
-      // console.log(pos, 'pos')
-      // console.log(pos2, 'pos2')
-      currentY.current = scrollAmount
-      camera.current.position.copy(pos);
-      camera.current.lookAt(pos2);
-      camera.current.updateProjectionMatrix();
-    }, []
-  )
 
   // const jumpToPosition = useCallback(
   //   (scrollAmount: number) => {

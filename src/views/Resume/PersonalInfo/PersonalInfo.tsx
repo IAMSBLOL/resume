@@ -46,10 +46,6 @@ const PersonalInfo = (): JSX.Element => {
               本人从事前端企图仔5年有余,在切图方面颇有心得...
             </p>
 
-            <p className='text'>
-              算了,摊牌了.<span className='tag nineninesix'>接受996</span><span className='tag no_money'>要钱少</span>
-            </p>
-
             <div className='contact_wrap'>
               <div className='contact_item'>
                   By: Matrix

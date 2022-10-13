@@ -79,7 +79,7 @@ const NotFound = (): JSX.Element => {
           useMemo(() => <canvas ref={canvasIns} className='canvas' />, [])
         }
         <div className='sorry_text'>
-          <p>抱歉，未移动端尺寸</p>
+          <p>抱歉，未适配移动端尺寸</p>
           <p>请用非IE浏览器打开</p>
         </div>
       </div>
